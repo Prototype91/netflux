@@ -20,8 +20,9 @@ nav {
   display: flex;
   align-items: center;
   padding: 0 50px;
-  background-color: rgb(20, 20, 20);
   margin: 0;
+  box-shadow: 0 7px 8px 0 #000000;
+  height: 68px;
 }
 
 nav ul {

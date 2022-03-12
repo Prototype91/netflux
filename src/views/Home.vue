@@ -3,14 +3,14 @@
     <h3>The best shows :</h3>
 
     <div class="shows-ctnr">
-      <ShowCard
-        v-for="(show, index) in shows.filter(
-          (item) => item.rating.average >= 8.5
-        )"
-        :key="index"
-        :show="show"
-      />
-      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
+      <div class="scroll-ctn">
+        <ShowCard
+          v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
+          :key="index"
+          :show="show"
+        />
+      </div>
+      <SlidingButtons />
     </div>
   </div>
 
@@ -18,21 +18,26 @@
     <h3>Science-fiction shows :</h3>
 
     <div class="shows-ctnr">
-      <ShowCard
-        v-for="(show, index) in shows.filter((item) =>
-          item.genres.includes('Science-Fiction')
-        )"
-        :key="index"
-        :show="show"
-      />
+      <div class="scroll-ctn">
+        <ShowCard
+          v-for="(show, index) in shows.filter((item) =>
+            item.genres.includes('Science-Fiction')
+          )"
+          :key="index"
+          :show="show"
+        />
+      </div>
+      <SlidingButtons />
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import SlidingButtons from "@/components/SlidingButtons";
 import ShowCard from "../components/ShowCard";
+import ShowsRepository from "../repositories/shows.repository";
+import ShowsService from "../services/shows.service";
+import ShowsMapper from "../mappers/shows.mapper";
 
 export default {
   name: "Home",
@@ -40,15 +45,30 @@ export default {
   data() {
     return { shows: [] };
   },
+  methods: {
+    getShows() {
+      ShowsService.getShows().then((res) => {
+        this.shows = ShowsMapper.mapToHomeShows(res.data);
+        this.storeShows();
+      });
+    },
+    storeShows() {
+      ShowsRepository.storeShows(this.shows);
+    },
+  },
   mounted() {
-    axios
-      .get("https://api.tvmaze.com/shows")
-      .then((res) => (this.shows = res.data));
+    this.getShows();
   },
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
 .best-shows {
   padding: 50px 0 0 50px;
 }
@@ -58,14 +78,19 @@ export default {
 }
 
 .shows-ctnr {
-  display: flex;
-  gap: 20px;
   position: relative;
-  overflow: scroll;
-  -ms-overflow-style: none;
 }
 
-.shows-ctnr::-webkit-scrollbar {
+.shows-ctnr .scroll-ctn {
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+  position: relative;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.shows-ctnr .scroll-ctn::-webkit-scrollbar {
   display: none;
 }
 </style>

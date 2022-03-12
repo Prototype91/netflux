@@ -1,7 +1,8 @@
 <template>
   <Loader :isLoading="isLoading" />
   <section v-if="!isLoading">
-    <img :src="episode?.image" :alt="episode.name" />
+    <img v-if="episode.image" :src="episode.image" :alt="episode.name" />
+    <img v-else src="../assets/no-image.jpg" alt="" />
     <div class="content">
       <h1>{{ episode.name }}</h1>
       <p class="rating">
@@ -36,7 +37,6 @@ export default {
     getDetails() {
       EpisodesClient.getEpisodeDetails(this.$route.params.id)
         .then((res) => {
-          console.log(res);
           this.episode = EpisodesMapper.mapToEpisode(res.data);
           setTimeout(() => {
             this.isLoading = false;

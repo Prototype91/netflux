@@ -2,12 +2,16 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    shows: [],
     comments: [],
   },
   mutations: {
     add(state, payload) {
-      return (state.shows = payload);
+      state.comments.push(payload);
+    },
+  },
+  getters: {
+    getComments: (state) => (id) => {
+      return state.comments.filter((c) => c.comment.id == id);
     },
   },
   actions: {
@@ -15,5 +19,4 @@ export default createStore({
       context.commit("add", payload);
     },
   },
-  modules: {},
 });

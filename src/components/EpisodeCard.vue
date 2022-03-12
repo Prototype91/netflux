@@ -1,6 +1,7 @@
 <template>
   <router-link class="card" :to="'/episode/' + episode.id">
-    <img :src="episode.image" :alt="episode.name" />
+    <img v-if="episode.image" :src="episode.image" :alt="episode.name" />
+    <img v-else src="../assets/no-image.jpg" alt="" />
     <p class="rating">
       <i class="fa-regular fa-star"></i> {{ episode.rating }}
     </p>

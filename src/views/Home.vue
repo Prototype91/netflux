@@ -7,9 +7,9 @@
       <div class="shows-ctnr">
         <div class="scroll-ctn">
           <ShowCard
-              v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
-              :key="index"
-              :show="show"
+            v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
+            :key="index"
+            :show="show"
           />
         </div>
         <SlidingButtons />
@@ -21,11 +21,11 @@
       <div class="shows-ctnr">
         <div class="scroll-ctn">
           <ShowCard
-              v-for="(show, index) in shows.filter((item) =>
-            item.genres.includes('Science-Fiction')
-          )"
-              :key="index"
-              :show="show"
+            v-for="(show, index) in shows.filter((item) =>
+              item.genres.includes('Science-Fiction')
+            )"
+            :key="index"
+            :show="show"
           />
         </div>
         <SlidingButtons />
@@ -37,7 +37,6 @@
 <script>
 import SlidingButtons from "../components/SlidingButtons";
 import ShowCard from "../components/ShowCard";
-import ShowsRepository from "../services/repositories/shows.repository";
 import ShowsService from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
 import Loader from "../components/Loader.vue";
@@ -55,14 +54,10 @@ export default {
     getShows() {
       ShowsService.getShows().then((res) => {
         this.shows = ShowsMapper.mapToShows(res.data);
-        this.storeShows();
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
       });
-    },
-    storeShows() {
-      ShowsRepository.storeShows(this.shows);
     },
   },
   mounted() {

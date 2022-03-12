@@ -1,6 +1,7 @@
 <template>
   <div class="card">
-    <img :src="cast?.image" :alt="cast.personName" />
+    <img v-if="cast.image" :src="cast.image" :alt="cast.personName" />
+    <img v-else src="../assets/no-image.jpg" alt="" />
     <p>
       {{ cast.personName }} <br />
       as <br />{{ cast.characterName }}

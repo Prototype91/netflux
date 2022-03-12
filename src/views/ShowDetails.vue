@@ -1,7 +1,12 @@
 <template>
   <Loader :isLoading="isLoading" />
   <section v-if="show && !this.isLoading">
-    <img :src="episodes[0]?.image" :alt="show.name" />
+    <img
+      v-if="episodes[0].image"
+      :src="episodes[0].image"
+      :alt="episodes[0].name"
+    />
+    <img v-else src="../assets/no-image.jpg" alt="" />
     <div class="content">
       <h1>{{ show.name }}</h1>
       <p class="rating">
@@ -31,14 +36,20 @@
         <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
       </div>
     </div>
-
     <div>
       <h2>Comments</h2>
-
-      <form class="comment-form">
-        <textarea placeholder="Write a comment here ..." />
-        <button>Send</button>
+      <form class="comment-form" @submit.prevent="addComment()">
+        <textarea
+          v-model="comment.text"
+          placeholder="Write a comment here ..."
+        />
+        <button type="submit">Send</button>
       </form>
+      <div>
+        <p v-for="(c, index) in comments" :key="index">
+          {{ c.comment.username }} - {{ c.comment.text }} - {{ c.comment.date }}
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -53,6 +64,8 @@ import SeasonsMapper from "../services/mappers/seasons.mapper";
 import EpisodesMapper from "../services/mappers/episodes.mapper";
 import CastMapper from "../services/mappers/cast.mapper";
 import ShowsHelper from "../services/helpers/shows.helper";
+import ShowsRepository from "../services/repositories/shows.repository";
+import moment from "moment";
 
 export default {
   name: "ShowDetails",
@@ -64,9 +77,17 @@ export default {
       episodes: [],
       cast: [],
       isLoading: true,
+      comment: {
+        id: null,
+        text: null,
+        username: "Anonymous",
+      },
     };
   },
   computed: {
+    comments() {
+      return this.$store.getters.getComments(this.show.id);
+    },
     finalSummary() {
       return ShowsHelper.getSummary(this.show.summary);
     },
@@ -76,7 +97,6 @@ export default {
       ShowsClient.getShowDetails(this.$route.params.id)
         .then((res) => {
           this.show = ShowsMapper.mapToShow(res.data);
-          console.log(res.data);
           this.seasons = SeasonsMapper.mapToSeasons(res.data._embedded.seasons);
           this.episodes = EpisodesMapper.mapToEpisodes(
             res.data._embedded.episodes
@@ -87,6 +107,15 @@ export default {
           }, 1000);
         })
         .catch((err) => console.error(err));
+    },
+    addComment() {
+      if (this.comment.text?.trim()?.length) {
+        ShowsRepository.storeComment({
+          ...this.comment,
+          id: this.show.id,
+          date: moment(new Date()).local(true).format("DD/MM/YYYY - HH:mm"),
+        });
+      }
     },
   },
   mounted() {
@@ -138,6 +167,7 @@ img {
   padding: 10px;
   width: 50%;
   height: 200px;
+  color: white;
 }
 
 .comment-form button {

@@ -8,7 +8,7 @@
         </li>
       </ul>
     </div>
-    <form v-if="searchMode" @submit="handleSubmit">
+    <form v-if="searchMode" @submit.prevent="handleSubmit">
       <button>
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
@@ -43,8 +43,7 @@ export default {
     handleChange(e) {
       this.searchQuery = e.target.value;
     },
-    handleSubmit(e) {
-      e.preventDefault();
+    handleSubmit() {
       this.$router.push(`/search?q=${this.searchQuery}`);
     },
   },
@@ -112,9 +111,8 @@ nav button {
 }
 
 nav button > * {
-  color:white;
+  color: white;
   width: 20px;
   pointer-events: none;
 }
-
 </style>

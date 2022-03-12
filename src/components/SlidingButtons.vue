@@ -1,10 +1,10 @@
 <template>
-    <button class="left" @click="ScrollLeft">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="right" @click="ScrollRight">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
+  <button class="left" @click="ScrollLeft">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <button class="right" @click="ScrollRight">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
 </template>
 
 <script>
@@ -12,10 +12,12 @@ export default {
   name: "SlidingButtons",
   methods: {
     ScrollRight() {
-      this.$el.parentNode.querySelector('.scroll-ctn').scrollLeft += this.$el.parentNode.querySelector('.scroll-ctn').clientWidth;
+      this.$el.parentNode.querySelector(".scroll-ctn").scrollLeft +=
+        this.$el.parentNode.querySelector(".scroll-ctn").clientWidth;
     },
     ScrollLeft() {
-      this.$el.parentNode.querySelector('.scroll-ctn').scrollLeft -= this.$el.parentNode.querySelector('.scroll-ctn').clientWidth;
+      this.$el.parentNode.querySelector(".scroll-ctn").scrollLeft -=
+        this.$el.parentNode.querySelector(".scroll-ctn").clientWidth;
     },
   },
 };
@@ -40,7 +42,6 @@ button {
 
 .left {
   left: 0%;
-  
 }
 
 .right {

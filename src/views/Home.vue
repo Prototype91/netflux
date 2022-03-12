@@ -10,7 +10,7 @@
           :show="show"
         />
       </div>
-      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
+      <SlidingButtons />
     </div>
   </div>
 
@@ -27,7 +27,7 @@
           :show="show"
         />
       </div>
-      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
+      <SlidingButtons />
     </div>
   </div>
 </template>
@@ -63,6 +63,12 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
 .best-shows {
   padding: 50px 0 0 50px;
 }

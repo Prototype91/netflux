@@ -1,7 +1,8 @@
 <template>
   <router-link class="card" :to="'/show/' + show.id">
-    <img :src="show.image" :alt="show.name" />
-    <p class="rating"><i class="fa-regular fa-star"></i> {{ show.rating }}</p>
+    <img v-if="show.image !== undefined" :src="show.image" :alt="show.name" />
+    <img v-else src="../assets/no-image.jpg"  alt=""/>
+    <p class="rating"><i class="fa-regular fa-star"></i> {{ show.rating ? show.rating : "N/A" }}</p>
   </router-link>
 </template>
 

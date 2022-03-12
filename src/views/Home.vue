@@ -1,5 +1,6 @@
 <template>
-  <div class="best-shows">
+  <Loader :isLoading="isLoading" />
+  <div class="best-shows" v-if="!isLoading">
     <h3>The best shows :</h3>
 
     <div class="shows-ctnr">
@@ -13,8 +14,7 @@
       <SlidingButtons />
     </div>
   </div>
-
-  <div class="best-shows">
+  <div class="best-shows" v-if="!isLoading">
     <h3>Science-fiction shows :</h3>
 
     <div class="shows-ctnr">
@@ -38,18 +38,25 @@ import ShowCard from "../components/ShowCard";
 import ShowsRepository from "../services/repositories/shows.repository";
 import ShowsService from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Home",
-  components: { ShowCard, SlidingButtons },
+  components: { ShowCard, SlidingButtons, Loader },
   data() {
-    return { shows: [] };
+    return {
+      shows: [],
+      isLoading: true,
+    };
   },
   methods: {
     getShows() {
       ShowsService.getShows().then((res) => {
         this.shows = ShowsMapper.mapToHomeShows(res.data);
         this.storeShows();
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
       });
     },
     storeShows() {

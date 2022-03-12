@@ -1,5 +1,6 @@
 <template>
-  <section class="search-section">
+  <Loader :isLoading="isLoading" />
+  <section class="search-section" v-if="!isLoading">
     <p v-if="results?.length">Titres associés à : {{ this.$route.query.q }}</p>
 
     <p v-else class="no-results">
@@ -20,13 +21,15 @@
 import axios from "axios";
 import ShowCard from "../components/ShowCard.vue";
 import ShowsMapper from "../services/mappers/shows.mapper";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Search",
-  components: { ShowCard },
+  components: { ShowCard, Loader },
   data() {
     return {
       results: [],
+      isLoading: true,
     };
   },
   methods: {
@@ -36,9 +39,12 @@ export default {
 
       axios
         .get(`https://api.tvmaze.com/search/shows?q=${query}`)
-        .then(
-          (res) => (this.results = ShowsMapper.mapToSearchedShows(res.data))
-        );
+        .then((res) => {
+          this.results = ShowsMapper.mapToSearchedShows(res.data);
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
+        });
     },
   },
   mounted() {
@@ -46,6 +52,7 @@ export default {
   },
   watch: {
     "$route.query.q"() {
+      this.isLoading = true;
       this.search();
     },
   },

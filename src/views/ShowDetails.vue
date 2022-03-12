@@ -44,7 +44,7 @@ import EpisodeCard from "../components/EpisodeCard";
 import Loader from "../components/Loader.vue";
 
 export default {
-  name: "Details",
+  name: "ShowDetails",
   components: { CastCard, EpisodeCard, Loader },
   data() {
     return {

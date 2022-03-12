@@ -34,6 +34,15 @@
         <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
       </div>
     </div>
+
+    <div>
+      <h2>Comments</h2>
+
+      <form class="comment-form">
+        <textarea placeholder="Write a comment here ..." />
+        <button>Send</button>
+      </form>
+    </div>
   </section>
 </template>
 
@@ -93,7 +102,7 @@ export default {
 <style scoped>
 section {
   padding: 50px;
-  color: white;
+  color: #fff;
   text-align: center;
 }
 
@@ -114,9 +123,38 @@ img {
 }
 
 .content {
-  margin-bottom: 100px;
+  margin: 0 auto 100px auto;
+  width: 80%;
 }
 .content p:not(.rating) {
   text-align: left;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-form textarea {
+  background-color: rgb(20, 20, 20);
+  padding: 10px;
+  width: 50%;
+  height: 200px;
+}
+
+.comment-form button {
+  all: unset;
+  background-color: white;
+  color: black;
+  padding: 0.5em 1.5em;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.comment-form button:hover {
+  background-color: #c00;
+  color: #fff;
 }
 </style>

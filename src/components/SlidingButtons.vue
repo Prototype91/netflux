@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button {
   position: absolute;
   cursor: pointer;
@@ -35,16 +35,16 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 3rem;
-  border: 0px;
+  border: 0;
   height: 100%;
-  top: 0px;
+  top: 0;
 }
 
 .left {
-  left: 0%;
+  left: 0;
 }
 
 .right {
-  right: 0%;
+  right: 0;
 }
 </style>

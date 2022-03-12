@@ -66,6 +66,11 @@ section p:not(.rating) {
   text-align: left;
 }
 
+.content {
+  width: 80%;
+  margin: 0 auto;
+}
+
 img {
   max-width: 60%;
   display: flex;

@@ -1,35 +1,37 @@
 <template>
   <Loader :isLoading="isLoading" />
-  <div class="best-shows" v-if="!isLoading">
-    <h3>The best shows :</h3>
+  <section v-if="!isLoading">
+    <div class="best-shows" v-if="!isLoading">
+      <h3>The best shows :</h3>
 
-    <div class="shows-ctnr">
-      <div class="scroll-ctn">
-        <ShowCard
-          v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
-          :key="index"
-          :show="show"
-        />
+      <div class="shows-ctnr">
+        <div class="scroll-ctn">
+          <ShowCard
+              v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
+              :key="index"
+              :show="show"
+          />
+        </div>
+        <SlidingButtons />
       </div>
-      <SlidingButtons />
     </div>
-  </div>
-  <div class="best-shows" v-if="!isLoading">
-    <h3>Science-fiction shows :</h3>
+    <div class="best-shows" v-if="!isLoading">
+      <h3>Science-fiction shows :</h3>
 
-    <div class="shows-ctnr">
-      <div class="scroll-ctn">
-        <ShowCard
-          v-for="(show, index) in shows.filter((item) =>
+      <div class="shows-ctnr">
+        <div class="scroll-ctn">
+          <ShowCard
+              v-for="(show, index) in shows.filter((item) =>
             item.genres.includes('Science-Fiction')
           )"
-          :key="index"
-          :show="show"
-        />
+              :key="index"
+              :show="show"
+          />
+        </div>
+        <SlidingButtons />
       </div>
-      <SlidingButtons />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -76,8 +78,8 @@ export default {
   font-family: "Inter", sans-serif;
 }
 
-.best-shows {
-  padding: 50px 0 0 50px;
+section {
+  padding: 50px 0 50px 50px;
 }
 
 .best-shows h3 {

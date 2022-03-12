@@ -18,8 +18,9 @@
 
   <div class="best-shows">
     <h3>Science-fiction shows :</h3>
+
     <div class="shows-ctnr">
-      <div class="scroll-ctn">)
+      <div class="scroll-ctn">
         <ShowCard
           v-for="(show, index) in shows.filter((item) =>
             item.genres.includes('Science-Fiction')

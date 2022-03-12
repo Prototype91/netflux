@@ -1,15 +1,14 @@
 <template>
   <Loader :isLoading="isLoading" />
   <section v-if="show && !this.isLoading">
-    <img :src="episodes[0]?.image?.original" :alt="show.name" />
+    <img :src="episodes[0]?.image" :alt="show.name" />
     <div class="content">
       <h1>{{ show.name }}</h1>
       <p class="rating">
-        <i class="fa-regular fa-star"></i> {{ show?.rating?.average }}
+        <i class="fa-regular fa-star"></i> {{ show?.rating }}
       </p>
       <p v-if="show.summary">{{ finalSummary }}</p>
     </div>
-
     <div>
       <h2>Seasons</h2>
       <div v-for="(season, seasonIndex) in seasons" :key="seasonIndex">
@@ -26,10 +25,8 @@
         </div>
       </div>
     </div>
-
     <div>
       <h2>Cast</h2>
-
       <div class="season-ctnr">
         <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
       </div>
@@ -47,10 +44,15 @@
 </template>
 
 <script>
-import axios from "axios";
 import CastCard from "../components/CastCard";
 import EpisodeCard from "../components/EpisodeCard";
 import Loader from "../components/Loader.vue";
+import ShowsClient from "../services/clients/shows.client";
+import ShowsMapper from "../services/mappers/shows.mapper";
+import SeasonsMapper from "../services/mappers/seasons.mapper";
+import EpisodesMapper from "../services/mappers/episodes.mapper";
+import CastMapper from "../services/mappers/cast.mapper";
+import ShowsHelper from "../services/helpers/shows.helper";
 
 export default {
   name: "ShowDetails",
@@ -66,26 +68,20 @@ export default {
   },
   computed: {
     finalSummary() {
-      return this.show.summary
-        .replaceAll("<p>", "")
-        .replaceAll("</p>", "")
-        .replaceAll("<b>", "")
-        .replaceAll("</b>", "");
+      return ShowsHelper.getSummary(this.show.summary);
     },
   },
   methods: {
     getDetails() {
-      let id = this.$route.params.id;
-
-      axios
-        .get(
-          `https://api.tvmaze.com/shows/${id}?embed[]=seasons&embed[]=episodes&embed[]=cast`
-        )
+      ShowsClient.getShowDetails(this.$route.params.id)
         .then((res) => {
-          this.show = res.data;
-          this.seasons = res.data._embedded.seasons;
-          this.episodes = res.data._embedded.episodes;
-          this.cast = res.data._embedded.cast;
+          this.show = ShowsMapper.mapToShow(res.data);
+          console.log(res.data);
+          this.seasons = SeasonsMapper.mapToSeasons(res.data._embedded.seasons);
+          this.episodes = EpisodesMapper.mapToEpisodes(
+            res.data._embedded.episodes
+          );
+          this.cast = CastMapper.mapToCast(res.data._embedded.cast);
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);

@@ -1,11 +1,11 @@
 <template>
   <Loader :isLoading="isLoading" />
   <section v-if="!isLoading">
-    <img :src="episode?.image?.original" :alt="episode.name" />
+    <img :src="episode?.image" :alt="episode.name" />
     <div class="content">
       <h1>{{ episode.name }}</h1>
       <p class="rating">
-        <i class="fa-regular fa-star"></i> {{ episode?.rating?.average }}
+        <i class="fa-regular fa-star"></i> {{ episode?.rating }}
       </p>
       <p v-if="episode.summary">{{ finalSummary }}</p>
     </div>
@@ -13,8 +13,10 @@
 </template>
 
 <script>
-import axios from "axios";
 import Loader from "../components/Loader.vue";
+import EpisodesClient from "../services/clients/episodes.client";
+import EpisodesMapper from "../services/mappers/episodes.mapper";
+import ShowsHelper from "../services/helpers/shows.helper";
 
 export default {
   name: "EpisodeDetails",
@@ -27,21 +29,15 @@ export default {
   },
   computed: {
     finalSummary() {
-      return this.episode.summary
-        .replaceAll("<p>", "")
-        .replaceAll("</p>", "")
-        .replaceAll("<b>", "")
-        .replaceAll("</b>", "");
+      return ShowsHelper.getSummary(this.episode.summary);
     },
   },
   methods: {
     getDetails() {
-      let id = this.$route.params.id;
-
-      axios
-        .get(`https://api.tvmaze.com/episodes/${id}`)
+      EpisodesClient.getEpisodeDetails(this.$route.params.id)
         .then((res) => {
-          this.episode = res.data;
+          console.log(res);
+          this.episode = EpisodesMapper.mapToEpisode(res.data);
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);

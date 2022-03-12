@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import ShowCard from "../components/ShowCard.vue";
+import ShowsClient from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
 import Loader from "../components/Loader.vue";
 
@@ -35,16 +35,12 @@ export default {
   methods: {
     search() {
       this.results = [];
-      let query = this.$route.query.q;
-
-      axios
-        .get(`https://api.tvmaze.com/search/shows?q=${query}`)
-        .then((res) => {
-          this.results = ShowsMapper.mapToSearchedShows(res.data);
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 1000);
-        });
+      ShowsClient.getSearchedShows(this.$route.query.q).then((res) => {
+        this.results = ShowsMapper.mapToSearchedShows(res.data);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      });
     },
   },
   mounted() {

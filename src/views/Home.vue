@@ -54,7 +54,7 @@ export default {
   methods: {
     getShows() {
       ShowsService.getShows().then((res) => {
-        this.shows = ShowsMapper.mapToHomeShows(res.data);
+        this.shows = ShowsMapper.mapToShows(res.data);
         this.storeShows();
         setTimeout(() => {
           this.isLoading = false;

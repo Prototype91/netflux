@@ -1,12 +1,24 @@
 export default class ShowsMapper {
-  static mapToHomeShows(shows) {
+  static mapToShows(shows) {
     return shows.map((item) => ({
       id: item.id,
       image: item.image?.medium,
       name: item.name,
       rating: item.rating.average,
       genres: item.genres,
+      summary: item.summary,
     }));
+  }
+
+  static mapToShow(show) {
+    return {
+      id: show.id,
+      image: show.image?.medium,
+      name: show.name,
+      rating: show.rating.average,
+      genres: show.genres,
+      summary: show.summary ?? null,
+    };
   }
 
   static mapToSearchedShows(shows) {

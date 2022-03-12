@@ -1,9 +1,9 @@
 <template>
   <div class="card">
-    <img :src="cast?.person?.image?.medium" :alt="cast.person.name" />
+    <img :src="cast?.image" :alt="cast.personName" />
     <p>
-      {{ cast.person.name }} <br />
-      as <br />{{ cast.character.name }}
+      {{ cast.personName }} <br />
+      as <br />{{ cast.characterName }}
     </p>
   </div>
 </template>

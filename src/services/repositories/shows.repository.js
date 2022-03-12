@@ -8,4 +8,11 @@ export default class ShowsRepository {
       shows,
     });
   }
+
+  static storeComment(comment) {
+    store.dispatch({
+      type: type.Add,
+      comment,
+    });
+  }
 }

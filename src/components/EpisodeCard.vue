@@ -1,7 +1,9 @@
 <template>
   <router-link class="card" :to="'/episode/' + episode.id">
-    <img :src="episode.image?.medium" :alt="episode.name" />
-    <p class="rating"><i class="fa-regular fa-star"></i> {{ episode.rating.average }}</p>
+    <img :src="episode.image" :alt="episode.name" />
+    <p class="rating">
+      <i class="fa-regular fa-star"></i> {{ episode.rating }}
+    </p>
     <p>{{ episode.name }}</p>
   </router-link>
 </template>

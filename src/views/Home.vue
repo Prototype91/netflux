@@ -3,28 +3,32 @@
     <h3>The best shows :</h3>
 
     <div class="shows-ctnr">
-      <ShowCard
-        v-for="(show, index) in shows.filter(
-          (item) => item.rating.average >= 8.5
-        )"
-        :key="index"
-        :show="show"
-      />
+      <div class="scroll-ctn">
+        <ShowCard
+          v-for="(show, index) in shows.filter(
+            (item) => item.rating.average >= 8.5
+          )"
+          :key="index"
+          :show="show"
+        />
+      </div>
       <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
     </div>
   </div>
 
   <div class="best-shows">
     <h3>Science-fiction shows :</h3>
-
     <div class="shows-ctnr">
-      <ShowCard
-        v-for="(show, index) in shows.filter((item) =>
-          item.genres.includes('Science-Fiction')
-        )"
-        :key="index"
-        :show="show"
-      />
+      <div class="scroll-ctn">)
+        <ShowCard
+          v-for="(show, index) in shows.filter((item) =>
+            item.genres.includes('Science-Fiction')
+          )"
+          :key="index"
+          :show="show"
+        />
+      </div>
+      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
     </div>
   </div>
 </template>
@@ -58,14 +62,19 @@ export default {
 }
 
 .shows-ctnr {
-  display: flex;
-  gap: 20px;
   position: relative;
-  overflow: scroll;
-  -ms-overflow-style: none;
 }
 
-.shows-ctnr::-webkit-scrollbar {
+.shows-ctnr .scroll-ctn {
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+  position: relative;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.shows-ctnr .scroll-ctn::-webkit-scrollbar {
   display: none;
 }
 </style>

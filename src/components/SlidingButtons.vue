@@ -1,12 +1,10 @@
 <template>
-  <div class="sliding-buttons">
-    <button @click="ScrollLeft">
+    <button class="left" @click="ScrollLeft">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
-    <button @click="ScrollRight">
+    <button class="right" @click="ScrollRight">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
-  </div>
 </template>
 
 <script>
@@ -14,29 +12,18 @@ export default {
   name: "SlidingButtons",
   methods: {
     ScrollRight() {
-      console.log(this.$el);
-      console.log(this.$el.parentNode);
-      this.$el.parentNode.scrollLeft += this.$el.parentNode.clientWidth;
+      this.$el.parentNode.querySelector('.scroll-ctn').scrollLeft += this.$el.parentNode.querySelector('.scroll-ctn').clientWidth;
     },
     ScrollLeft() {
-      console.log(this.$el);
-      console.log(this.$el.parentNode);
-      this.$el.parentNode.scrollLeft -= this.$el.parentNode.clientWidth;
+      this.$el.parentNode.querySelector('.scroll-ctn').scrollLeft -= this.$el.parentNode.querySelector('.scroll-ctn').clientWidth;
     },
   },
 };
 </script>
 
 <style>
-.sliding-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: calc(100vw - 50px);
-  height: 100%;
+button {
   position: absolute;
-}
-
-.sliding-buttons button {
   cursor: pointer;
   background: rgba(20, 20, 20, 0.5);
   color: white;
@@ -47,5 +34,16 @@ export default {
   align-items: center;
   font-size: 3rem;
   border: 0px;
+  height: 100%;
+  top: 0px;
+}
+
+.left {
+  left: 0%;
+  
+}
+
+.right {
+  right: 0%;
 }
 </style>

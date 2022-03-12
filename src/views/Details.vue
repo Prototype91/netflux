@@ -1,9 +1,7 @@
 <template>
-  <section v-if="show !== {}">
-    <img
-      :src="episodes[0]?.image?.original"
-      :alt="show.name"
-    />
+  <Loader :isLoading="isLoading" />
+  <section v-if="show && !this.isLoading">
+    <img :src="episodes[0]?.image?.original" :alt="show.name" />
     <div class="content">
       <h1>{{ show.name }}</h1>
       <p class="rating">
@@ -43,16 +41,18 @@
 import axios from "axios";
 import CastCard from "../components/CastCard";
 import EpisodeCard from "../components/EpisodeCard";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Details",
-  components: { CastCard, EpisodeCard },
+  components: { CastCard, EpisodeCard, Loader },
   data() {
     return {
       show: {},
       seasons: [],
       episodes: [],
       cast: [],
+      isLoading: true,
     };
   },
   computed: {
@@ -77,6 +77,9 @@ export default {
           this.seasons = res.data._embedded.seasons;
           this.episodes = res.data._embedded.episodes;
           this.cast = res.data._embedded.cast;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         })
         .catch((err) => console.error(err));
     },

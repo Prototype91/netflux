@@ -10,7 +10,7 @@
       <ShowCard
         v-for="(result, index) in results"
         :key="index"
-        :show="result.show"
+        :show="result"
       />
     </div>
   </section>
@@ -19,6 +19,7 @@
 <script>
 import axios from "axios";
 import ShowCard from "../components/ShowCard.vue";
+import ShowsMapper from "../services/mappers/shows.mapper";
 
 export default {
   name: "Search",
@@ -35,7 +36,9 @@ export default {
 
       axios
         .get(`https://api.tvmaze.com/search/shows?q=${query}`)
-        .then((res) => (this.results = res.data));
+        .then(
+          (res) => (this.results = ShowsMapper.mapToSearchedShows(res.data))
+        );
     },
   },
   mounted() {

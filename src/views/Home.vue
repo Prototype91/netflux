@@ -5,9 +5,7 @@
     <div class="shows-ctnr">
       <div class="scroll-ctn">
         <ShowCard
-          v-for="(show, index) in shows.filter(
-            (item) => item.rating.average >= 8.5
-          )"
+          v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
           :key="index"
           :show="show"
         />
@@ -35,9 +33,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import SlidingButtons from "@/components/SlidingButtons";
 import ShowCard from "../components/ShowCard";
+import ShowsRepository from "../repositories/shows.repository";
+import ShowsService from "../services/shows.service";
+import ShowsMapper from "../mappers/shows.mapper";
 
 export default {
   name: "Home",
@@ -45,10 +45,19 @@ export default {
   data() {
     return { shows: [] };
   },
+  methods: {
+    getShows() {
+      ShowsService.getShows().then((res) => {
+        this.shows = ShowsMapper.mapToHomeShows(res.data);
+        this.storeShows();
+      });
+    },
+    storeShows() {
+      ShowsRepository.storeShows(this.shows);
+    },
+  },
   mounted() {
-    axios
-      .get("https://api.tvmaze.com/shows")
-      .then((res) => (this.shows = res.data));
+    this.getShows();
   },
 };
 </script>

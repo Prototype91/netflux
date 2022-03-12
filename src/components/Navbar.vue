@@ -9,12 +9,6 @@
       </ul>
     </div>
     <form v-if="searchMode" @submit="handleSubmit">
-      <input
-        type="text"
-        ref="searchInput"
-        @blur="searchMode = false"
-        @change="handleChange"
-      />
       <button>
         <svg viewBox="0 0 512 512">
           <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.-->
@@ -24,6 +18,13 @@
           />
         </svg>
       </button>
+      <input
+        type="text"
+        ref="searchInput"
+        @blur="searchMode = false"
+        @change="handleChange"
+        placeholder="Search a show ..."
+      />
     </form>
     <button v-else @click="setSearchMode">
       <svg viewBox="0 0 512 512">
@@ -105,11 +106,20 @@ nav ul a:hover {
 
 nav form {
   display: flex;
+  align-items: center;
+  padding: 7px;
   gap: 10px;
+  border: 1px solid white;
+}
+
+nav form input {
+  all: unset;
+  color: white;
 }
 
 nav button {
   all: unset;
+  display: flex;
   cursor: pointer;
 }
 

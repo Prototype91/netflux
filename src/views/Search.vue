@@ -1,8 +1,14 @@
 <template>
   <section class="search-section">
-    <p>Titres associés à : {{ this.$route.query.q }}</p>
+    <p v-if="results.length > 0">
+      Titres associés à : {{ this.$route.query.q }}
+    </p>
 
-    <div class="results-ctnr">
+    <p v-else class="no-results">
+      No results for your search : "{{ this.$route.query.q }}"
+    </p>
+
+    <div class="results-ctnr" v-if="results.length > 0">
       <ShowCard
         v-for="(result, index) in results"
         :key="index"
@@ -25,6 +31,7 @@ export default {
     };
   },
   mounted() {
+    this.results = [];
     let query = this.$route.query.q;
 
     axios
@@ -41,6 +48,11 @@ export default {
 
 .search-section p {
   color: #808080;
+}
+
+.search-section .no-results {
+  color: white;
+  text-align: center;
 }
 
 .results-ctnr {

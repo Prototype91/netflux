@@ -1,14 +1,12 @@
 <template>
   <section class="search-section">
-    <p v-if="results.length > 0">
-      Titres associés à : {{ this.$route.query.q }}
-    </p>
+    <p v-if="results?.length">Titres associés à : {{ this.$route.query.q }}</p>
 
     <p v-else class="no-results">
       No results for your search : "{{ this.$route.query.q }}"
     </p>
 
-    <div class="results-ctnr" v-if="results.length > 0">
+    <div class="results-ctnr" v-if="results?.length">
       <ShowCard
         v-for="(result, index) in results"
         :key="index"
@@ -30,13 +28,23 @@ export default {
       results: [],
     };
   },
-  mounted() {
-    this.results = [];
-    let query = this.$route.query.q;
+  methods: {
+    search() {
+      this.results = [];
+      let query = this.$route.query.q;
 
-    axios
-      .get(`https://api.tvmaze.com/search/shows?q=${query}`)
-      .then((res) => (this.results = res.data));
+      axios
+        .get(`https://api.tvmaze.com/search/shows?q=${query}`)
+        .then((res) => (this.results = res.data));
+    },
+  },
+  mounted() {
+    this.search();
+  },
+  watch: {
+    "$route.query.q"() {
+      this.search();
+    },
   },
 };
 </script>

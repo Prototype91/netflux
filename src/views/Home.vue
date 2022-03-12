@@ -49,10 +49,6 @@ export default {
 </script>
 
 <style>
-body {
-  overflow: hidden;
-}
-
 .best-shows {
   padding: 50px 0 0 50px;
 }
@@ -65,5 +61,11 @@ body {
   display: flex;
   gap: 20px;
   position: relative;
+  overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.shows-ctnr::-webkit-scrollbar {
+  display: none;
 }
 </style>

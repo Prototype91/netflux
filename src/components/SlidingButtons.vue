@@ -16,10 +16,12 @@ export default {
     ScrollRight() {
       console.log(this.$el);
       console.log(this.$el.parentNode);
+      this.$el.parentNode.scrollLeft += this.$el.parentNode.clientWidth;
     },
     ScrollLeft() {
       console.log(this.$el);
       console.log(this.$el.parentNode);
+      this.$el.parentNode.scrollLeft -= this.$el.parentNode.clientWidth;
     },
   },
 };

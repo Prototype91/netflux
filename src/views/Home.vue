@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import SlidingButtons from "@/components/SlidingButtons";
+import SlidingButtons from "../components/SlidingButtons";
 import ShowCard from "../components/ShowCard";
-import ShowsRepository from "../repositories/shows.repository";
-import ShowsService from "../services/shows.service";
-import ShowsMapper from "../mappers/shows.mapper";
+import ShowsRepository from "../services/repositories/shows.repository";
+import ShowsService from "../services/clients/shows.client";
+import ShowsMapper from "../services/mappers/shows.mapper";
 
 export default {
   name: "Home",

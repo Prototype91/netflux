@@ -41,8 +41,8 @@
 
 <script>
 import axios from "axios";
-import EpisodeCard from "@/components/EpisodeCard";
-import CastCard from "@/components/CastCard";
+import CastCard from "../components/CastCard";
+import EpisodeCard from "../components/EpisodeCard";
 
 export default {
   name: "Details",

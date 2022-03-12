@@ -10,7 +10,7 @@
         :key="index"
         :show="show"
       />
-      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft"/>
+      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft" />
     </div>
   </div>
 

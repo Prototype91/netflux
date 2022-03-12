@@ -1,10 +1,10 @@
 <template>
   <div class="sliding-buttons">
     <button @click="ScrollLeft">
-      &#10216;<!-- <font-awesome-icon icon="fa-solid fa-chevron-left" />-->
+      <i class="fa-solid fa-chevron-left"></i>
     </button>
     <button @click="ScrollRight">
-      &#10217;<!-- <font-awesome-icon icon="fa-solid fa-chevron-right" />-->
+      <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>
 </template>
@@ -14,14 +14,14 @@ export default {
   name: "SlidingButtons",
   methods: {
     ScrollRight() {
-      console.log(this.$el)
-      console.log(this.$el.parentNode)
+      console.log(this.$el);
+      console.log(this.$el.parentNode);
     },
     ScrollLeft() {
-      console.log(this.$el)
-      console.log(this.$el.parentNode)
-    }
-  }
+      console.log(this.$el);
+      console.log(this.$el.parentNode);
+    },
+  },
 };
 </script>
 

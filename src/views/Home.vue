@@ -31,8 +31,8 @@
 
 <script>
 import axios from "axios";
-import ShowCard from "@/components/ShowCard";
 import SlidingButtons from "@/components/SlidingButtons";
+import ShowCard from "../components/ShowCard";
 
 export default {
   name: "Home",

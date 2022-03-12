@@ -20,7 +20,7 @@
 
 <script>
 import axios from "axios";
-import ShowCard from "@/components/ShowCard";
+import ShowCard from "../components/ShowCard.vue";
 
 export default {
   name: "Search",

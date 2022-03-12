@@ -10,6 +10,7 @@
         :key="index"
         :show="show"
       />
+      <SlidingButtons @scroll-right="ScrollRight" @scroll-left="ScrollLeft"/>
     </div>
   </div>
 </template>
@@ -17,10 +18,11 @@
 <script>
 import axios from "axios";
 import ShowCard from "@/components/ShowCard";
+import SlidingButtons from "@/components/SlidingButtons";
 
 export default {
   name: "Home",
-  components: { ShowCard },
+  components: { ShowCard, SlidingButtons },
   data() {
     return { shows: [] };
   },
@@ -33,6 +35,10 @@ export default {
 </script>
 
 <style>
+body {
+  overflow: hidden;
+}
+
 .best-shows {
   padding: 50px 0 0 50px;
 }
@@ -44,6 +50,6 @@ export default {
 .shows-ctnr {
   display: flex;
   gap: 20px;
-  overflow: scroll;
+  position: relative;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="show.image.medium" :alt="show.name" />
+    <img :src="show.image?.medium" :alt="show.name" />
     <p class="rating">{{ show.rating.average }}</p>
   </div>
 </template>

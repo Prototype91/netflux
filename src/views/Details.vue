@@ -1,0 +1,104 @@
+<template>
+  <section v-if="show !== {}">
+    <img
+      v-if="episodes && episodes[0]"
+      :src="episodes[0].image.original"
+      :alt="show.name"
+    />
+    <div class="content">
+      <h1>{{ show.name }}</h1>
+      <p v-if="show.summary">{{ finalSummary }}</p>
+    </div>
+
+    <div>
+      <h2>Seasons</h2>
+      <div v-for="(season, seasonIndex) in seasons" :key="seasonIndex">
+        <h3>Season {{ seasonIndex + 1 }}</h3>
+
+        <div class="season-ctnr">
+          <EpisodeCard
+              v-for="(episode, episodeIndex) in episodes.filter(
+            (item) => item.season === seasonIndex + 1
+          )"
+              :key="episodeIndex"
+              :episode="episode"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import axios from "axios";
+import EpisodeCard from "@/components/EpisodeCard";
+
+export default {
+  name: "Details",
+  components: { EpisodeCard },
+  data() {
+    return {
+      show: {},
+      seasons: [],
+      episodes: [],
+      cast: [],
+    };
+  },
+  computed: {
+    finalSummary() {
+      return this.show.summary.replace("<p>", "").replace("</p>", "");
+    },
+  },
+  methods: {
+    getDetails() {
+      let id = this.$route.params.id;
+
+      axios
+        .get(
+          `https://api.tvmaze.com/shows/${id}?embed[]=seasons&embed[]=episodes&embed[]=cast`
+        )
+        .then((res) => {
+          this.show = res.data;
+          this.seasons = res.data._embedded.seasons;
+          this.episodes = res.data._embedded.episodes;
+          this.cast = res.data._embedded.cast;
+        })
+        .catch((err) => console.error(err));
+    },
+  },
+  mounted() {
+    this.getDetails();
+  },
+};
+</script>
+
+<style scoped>
+section {
+  padding: 50px;
+  color: white;
+  text-align: center;
+}
+
+section h3 {
+  text-align: left;
+}
+
+img {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.season-ctnr {
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+}
+
+.content {
+  margin-bottom: 100px;
+}
+.content p {
+  text-align: left;
+}
+</style>

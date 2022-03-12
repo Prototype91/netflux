@@ -1,8 +1,8 @@
 <template>
-  <div class="card">
+  <router-link class="card" :to="'/details/' + show.id">
     <img :src="show.image?.medium" :alt="show.name" />
     <p class="rating">{{ show.rating.average }}</p>
-  </div>
+  </router-link>
 </template>
 
 <script>

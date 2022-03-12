@@ -12,6 +12,20 @@
       />
     </div>
   </div>
+
+  <div class="best-shows">
+    <h3>Science-fiction shows :</h3>
+
+    <div class="shows-ctnr">
+      <ShowCard
+        v-for="(show, index) in shows.filter((item) =>
+          item.genres.includes('Science-Fiction')
+        )"
+        :key="index"
+        :show="show"
+      />
+    </div>
+  </div>
 </template>
 
 <script>

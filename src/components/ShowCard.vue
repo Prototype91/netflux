@@ -1,7 +1,7 @@
 <template>
-  <router-link class="card" :to="'/details/' + show.id">
+  <router-link class="card" :to="'/show/' + show.id">
     <img :src="show.image" :alt="show.name" />
-    <p class="rating">{{ show.rating }}</p>
+    <p class="rating"><i class="fa-regular fa-star"></i> {{ show.rating }}</p>
   </router-link>
 </template>
 

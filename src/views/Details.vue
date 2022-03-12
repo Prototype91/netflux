@@ -1,12 +1,14 @@
 <template>
   <section v-if="show !== {}">
     <img
-      v-if="episodes && episodes[0]"
-      :src="episodes[0].image.original"
+      :src="episodes[0]?.image?.original"
       :alt="show.name"
     />
     <div class="content">
       <h1>{{ show.name }}</h1>
+      <p class="rating">
+        <i class="fa-regular fa-star"></i> {{ show?.rating?.average }}
+      </p>
       <p v-if="show.summary">{{ finalSummary }}</p>
     </div>
 
@@ -17,13 +19,21 @@
 
         <div class="season-ctnr">
           <EpisodeCard
-              v-for="(episode, episodeIndex) in episodes.filter(
-            (item) => item.season === seasonIndex + 1
-          )"
-              :key="episodeIndex"
-              :episode="episode"
+            v-for="(episode, episodeIndex) in episodes.filter(
+              (item) => item.season === seasonIndex + 1
+            )"
+            :key="episodeIndex"
+            :episode="episode"
           />
         </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Cast</h2>
+
+      <div class="season-ctnr">
+        <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
       </div>
     </div>
   </section>
@@ -32,10 +42,11 @@
 <script>
 import axios from "axios";
 import EpisodeCard from "@/components/EpisodeCard";
+import CastCard from "@/components/CastCard";
 
 export default {
   name: "Details",
-  components: { EpisodeCard },
+  components: { CastCard, EpisodeCard },
   data() {
     return {
       show: {},
@@ -46,7 +57,11 @@ export default {
   },
   computed: {
     finalSummary() {
-      return this.show.summary.replace("<p>", "").replace("</p>", "");
+      return this.show.summary
+        .replaceAll("<p>", "")
+        .replaceAll("</p>", "")
+        .replaceAll("<b>", "")
+        .replaceAll("</b>", "");
     },
   },
   methods: {
@@ -84,7 +99,7 @@ section h3 {
 }
 
 img {
-  width: 60%;
+  max-width: 60%;
   margin: 0 auto;
   display: flex;
 }
@@ -98,7 +113,7 @@ img {
 .content {
   margin-bottom: 100px;
 }
-.content p {
+.content p:not(.rating) {
   text-align: left;
 }
 </style>

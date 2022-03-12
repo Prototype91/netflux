@@ -1,9 +1,8 @@
 <template>
   <Loader :isLoading="isLoading" />
   <section v-if="!isLoading">
-    <div class="best-shows" v-if="!isLoading">
+    <div class="best-shows">
       <h3>The best shows :</h3>
-
       <div class="shows-ctnr">
         <div class="scroll-ctn">
           <ShowCard
@@ -15,9 +14,8 @@
         <SlidingButtons />
       </div>
     </div>
-    <div class="best-shows" v-if="!isLoading">
+    <div class="best-shows">
       <h3>Science-fiction shows :</h3>
-
       <div class="shows-ctnr">
         <div class="scroll-ctn">
           <ShowCard

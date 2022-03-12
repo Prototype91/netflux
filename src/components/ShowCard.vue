@@ -24,5 +24,7 @@ export default {
   top: 10px;
   right: 10px;
   color: orange;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1px 2px;
 }
 </style>

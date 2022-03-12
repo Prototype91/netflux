@@ -1,6 +1,6 @@
 <template>
   <router-link class="card" :to="'/details/' + show.id">
-    <img :src="show.image?.medium" :alt="show.name" />
+    <img :src="show.image" :alt="show.name" />
     <p class="rating">{{ show.rating }}</p>
   </router-link>
 </template>

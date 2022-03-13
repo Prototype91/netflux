@@ -1,41 +1,39 @@
 <template>
-  <Loader :isLoading="isLoading" />
+  <Loader :isLoading="isLoading"/>
   <section v-if="!isLoading">
-    <div class="best-shows">
-      <h3>The best shows :</h3>
-      <div class="shows-ctnr">
-        <div class="scroll-ctn">
-          <ShowCard
-            v-for="(show, index) in shows.filter((item) => item.rating >= 8.5)"
-            :key="index"
-            :show="show"
-          />
-        </div>
-        <SlidingButtons />
-      </div>
-    </div>
-
-    <ListSeries title="Science-Fiction" :shows="shows" />
-    <ListSeries title="Horror" :shows="shows" />
+    <ListSeries title="Best Shows" :filtered-array="BestShows"/>
+    <ListSeries title="Science-Fiction" :filtered-array="ScienceFictionShows"/>
+    <ListSeries title="Horror" :filtered-array="HorrorShows"/>
   </section>
 </template>
 
 <script>
-import SlidingButtons from "../components/SlidingButtons";
 import ListSeries from "../components/ListSeries";
-import ShowCard from "../components/ShowCard";
 import ShowsService from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
 import Loader from "../components/Loader.vue";
 
 export default {
   name: "Home",
-  components: { ShowCard, SlidingButtons, Loader, ListSeries },
+  components: {Loader, ListSeries},
   data() {
     return {
       shows: [],
       isLoading: true,
     };
+  },
+  computed: {
+    BestShows() {
+      return this.shows.filter((item) => item.rating >= 8.5);
+    },
+    ScienceFictionShows() {
+      return this.shows.filter((item) =>
+          item.genres.includes("Science-Fiction")
+      );
+    },
+    HorrorShows() {
+      return this.shows.filter((item) => item.genres.includes("Horror"));
+    },
   },
   methods: {
     getShows() {
@@ -62,34 +60,8 @@ export default {
 
 section {
   padding: 50px 0 50px 50px;
-}
-
-.best-shows:not(:first-of-type) {
-  margin-top: 40px
-}
-
-.best-shows:first-of-type h3 {
-  margin-top: 0px;
-}
-
-.best-shows h3 {
-  color: #e5e5e5;
-}
-
-.shows-ctnr {
-  position: relative;
-}
-
-.shows-ctnr .scroll-ctn {
   display: flex;
-  gap: 20px;
-  overflow: scroll;
-  position: relative;
-  -ms-overflow-style: none;
-  scroll-behavior: smooth;
-}
-
-.shows-ctnr .scroll-ctn::-webkit-scrollbar {
-  display: none;
+  flex-direction: column;
+  gap: 40px;
 }
 </style>

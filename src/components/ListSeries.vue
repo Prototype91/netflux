@@ -1,12 +1,10 @@
 <template>
   <div class="best-shows">
-    <h3>{{ title }} shows :</h3>
+    <h3>{{ title }} :</h3>
     <div class="shows-ctnr">
       <div class="scroll-ctn">
         <ShowCard
-          v-for="(show, index) in shows.filter((item) =>
-            item.genres.includes(title)
-          )"
+          v-for="(show, index) in filteredArray"
           :key="index"
           :show="show"
         />
@@ -27,12 +25,12 @@ export default {
     SlidingButtons,
   },
   props: {
-    shows: {
-      type: Object,
-      required: true,
-    },
     title: {
       type: String,
+      required: true,
+    },
+    filteredArray: {
+      type: [],
       required: true,
     },
   },
@@ -42,6 +40,7 @@ export default {
 <style>
 .best-shows h3 {
   color: #e5e5e5;
+  margin-top: 0;
 }
 
 .shows-ctnr {

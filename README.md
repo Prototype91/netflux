@@ -14,6 +14,8 @@
 
 `npm run serve`
 
+Netflux is also available here : https://netflux-ywhuuaqbu-prototype91.vercel.app
+
 ## Technologies utilisées :
 
 - [Vue.js](https://fr.vuejs.org/)

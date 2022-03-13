@@ -125,6 +125,7 @@ export default {
           id: this.show.id,
           date: moment(new Date()).local(true).unix(),
         });
+        this.comment = "";
       }
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav v-bind:class="{ search: searchMode }">
     <div>
       <router-link to="/" class="netflux">Netflux</router-link>
       <ul>
@@ -102,6 +102,14 @@ nav form {
 nav form input {
   all: unset;
   color: white;
+}
+
+@media (max-width: 580px) {
+  nav.search {
+    height: 100px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 nav button {

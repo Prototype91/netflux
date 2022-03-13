@@ -14,10 +14,9 @@
         <SlidingButtons />
       </div>
     </div>
-    
-    <ListSeries title="Science-Fiction" :shows="shows"/>
-    <ListSeries title="Drama" :shows="shows"/>
 
+    <ListSeries title="Science-Fiction" :shows="shows" />
+    <ListSeries title="Horror" :shows="shows" />
   </section>
 </template>
 

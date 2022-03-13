@@ -1,19 +1,19 @@
 <template>
   <div class="best-shows">
-      <h3>{{title}} shows :</h3>
-      <div class="shows-ctnr">
-        <div class="scroll-ctn">
-          <ShowCard
-            v-for="(show, index) in shows.filter((item) =>
-              item.genres.includes('Science-Fiction')
-            )"
-            :key="index"
-            :show="show"
-          />
-        </div>
-        <SlidingButtons />
+    <h3>{{ title }} shows :</h3>
+    <div class="shows-ctnr">
+      <div class="scroll-ctn">
+        <ShowCard
+          v-for="(show, index) in shows.filter((item) =>
+            item.genres.includes(title)
+          )"
+          :key="index"
+          :show="show"
+        />
       </div>
+      <SlidingButtons />
     </div>
+  </div>
 </template>
 
 <script>
@@ -21,21 +21,22 @@ import SlidingButtons from "../components/SlidingButtons";
 import ShowCard from "../components/ShowCard";
 
 export default {
-    name: "ListSeries",
-    components: {
-        ShowCard, SlidingButtons
+  name: "ListSeries",
+  components: {
+    ShowCard,
+    SlidingButtons,
+  },
+  props: {
+    shows: {
+      type: Object,
+      required: true,
     },
-    props: {
-        shows: {
-            type: Object,
-            required: true
-        },
-        title: {
-            type: String,
-            required: true
-        },
+    title: {
+      type: String,
+      required: true,
     },
-}
+  },
+};
 </script>
 
 <style>

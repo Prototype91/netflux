@@ -1,6 +1,6 @@
 <template>
   <div class="best-shows">
-    <h3>{{ title }} :</h3>
+    <h3>{{ title }} shows :</h3>
     <div class="shows-ctnr">
       <div class="scroll-ctn">
         <ShowCard

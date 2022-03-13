@@ -1,9 +1,10 @@
 <template>
   <Loader :isLoading="isLoading"/>
   <section v-if="!isLoading">
-    <ListSeries title="Best Shows" :filtered-array="BestShows"/>
+    <ListSeries title="Best" :filtered-array="BestShows"/>
     <ListSeries title="Science-Fiction" :filtered-array="ScienceFictionShows"/>
     <ListSeries title="Horror" :filtered-array="HorrorShows"/>
+    <ListSeries title="Comedy" :filtered-array="ComedyShows"/>
   </section>
 </template>
 
@@ -34,6 +35,9 @@ export default {
     HorrorShows() {
       return this.shows.filter((item) => item.genres.includes("Horror"));
     },
+    ComedyShows() {
+      return this.shows.filter((item) => item.genres.includes("Comedy"));
+    }
   },
   methods: {
     getShows() {

@@ -64,6 +64,14 @@ section {
   padding: 50px 0 50px 50px;
 }
 
+.best-shows:not(:first-of-type) {
+  margin-top: 40px
+}
+
+.best-shows:first-of-type h3 {
+  margin-top: 0px;
+}
+
 .best-shows h3 {
   color: #e5e5e5;
 }

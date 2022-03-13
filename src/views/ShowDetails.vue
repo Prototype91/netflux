@@ -45,10 +45,12 @@
         />
         <button type="submit">Send</button>
       </form>
-      <div>
-        <p v-for="(c, index) in comments" :key="index">
-          {{ c.comment.username }} - {{ c.comment.text }} - {{ c.comment.date }}
-        </p>
+      <div class="comments">
+        <Comment
+          v-for="(c, index) in comments"
+          :key="index"
+          :comment="c.comment"
+        />
       </div>
     </div>
   </section>
@@ -66,10 +68,11 @@ import CastMapper from "../services/mappers/cast.mapper";
 import ShowsHelper from "../services/helpers/shows.helper";
 import ShowsRepository from "../services/repositories/shows.repository";
 import moment from "moment";
+import Comment from "@/components/Comment";
 
 export default {
   name: "ShowDetails",
-  components: { CastCard, EpisodeCard, Loader },
+  components: { Comment, CastCard, EpisodeCard, Loader },
   data() {
     return {
       show: {},
@@ -113,7 +116,7 @@ export default {
         ShowsRepository.storeComment({
           ...this.comment,
           id: this.show.id,
-          date: moment(new Date()).local(true).format("DD/MM/YYYY - HH:mm"),
+          date: moment(new Date()).local(true).unix(),
         });
       }
     },
@@ -182,5 +185,13 @@ img {
 .comment-form button:hover {
   background-color: #c00;
   color: #fff;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  gap: 20px;
 }
 </style>

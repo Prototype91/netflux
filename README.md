@@ -14,7 +14,7 @@
 
 `npm run serve`
 
-Netflux is also available here : https://netflux-prototype91.vercel.app
+Netflux est aussi disponible ici : https://netflux-prototype91.vercel.app
 
 ## Technologies utilisées :
 

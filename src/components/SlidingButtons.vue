@@ -30,6 +30,7 @@ button {
   background: rgba(20, 20, 20, 0.5);
   color: white;
   width: 4%;
+  min-width: 40px;
   z-index: 999;
   display: flex;
   justify-content: center;

@@ -187,8 +187,10 @@ img {
   background-color: rgb(20, 20, 20);
   padding: 10px;
   width: 50%;
+  min-width: 200px;
   height: 200px;
   color: white;
+  box-sizing: border-box;
 }
 
 .comment-form button {

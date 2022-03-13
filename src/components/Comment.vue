@@ -34,10 +34,12 @@ p {
   text-align: left;
   border: 1px solid #757474;
   width: 40%;
+  min-width: 200px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  box-sizing: border-box;
 }
 
 .comment .comment-header {

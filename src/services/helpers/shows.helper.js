@@ -4,6 +4,8 @@ export default class ShowsHelper {
       .replaceAll("<p>", "")
       .replaceAll("</p>", "")
       .replaceAll("<b>", "")
-      .replaceAll("</b>", "");
+      .replaceAll("</b>", "")
+      .replaceAll("<i>", "")
+      .replaceAll("</i>", "");
   }
 }

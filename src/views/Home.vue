@@ -1,10 +1,10 @@
 <template>
-  <Loader :isLoading="isLoading"/>
+  <Loader :isLoading="isLoading" />
   <section v-if="!isLoading">
-    <ListSeries title="Best" :filtered-array="BestShows"/>
-    <ListSeries title="Science-Fiction" :filtered-array="ScienceFictionShows"/>
-    <ListSeries title="Horror" :filtered-array="HorrorShows"/>
-    <ListSeries title="Comedy" :filtered-array="ComedyShows"/>
+    <ListSeries title="Best" :filtered-array="BestShows" />
+    <ListSeries title="Science-Fiction" :filtered-array="ScienceFictionShows" />
+    <ListSeries title="Horror" :filtered-array="HorrorShows" />
+    <ListSeries title="Comedy" :filtered-array="ComedyShows" />
   </section>
 </template>
 
@@ -16,7 +16,7 @@ import Loader from "../components/Loader.vue";
 
 export default {
   name: "Home",
-  components: {Loader, ListSeries},
+  components: { Loader, ListSeries },
   data() {
     return {
       shows: [],
@@ -29,7 +29,7 @@ export default {
     },
     ScienceFictionShows() {
       return this.shows.filter((item) =>
-          item.genres.includes("Science-Fiction")
+        item.genres.includes("Science-Fiction")
       );
     },
     HorrorShows() {
@@ -37,7 +37,7 @@ export default {
     },
     ComedyShows() {
       return this.shows.filter((item) => item.genres.includes("Comedy"));
-    }
+    },
   },
   methods: {
     getShows() {

@@ -21,16 +21,15 @@
 
         <div class="season-ctnr">
           <div class="scroll-ctn">
-          <EpisodeCard
-            v-for="(episode, episodeIndex) in episodes.filter(
-              (item) => item.season === seasonIndex + 1
-            )"
-            :key="episodeIndex"
-            :episode="episode"
-          />
-        </div>
-        <SlidingButtons />
-
+            <EpisodeCard
+              v-for="(episode, episodeIndex) in episodes.filter(
+                (item) => item.season === seasonIndex + 1
+              )"
+              :key="episodeIndex"
+              :episode="episode"
+            />
+          </div>
+          <SlidingButtons />
         </div>
       </div>
     </div>

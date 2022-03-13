@@ -1,24 +1,23 @@
-# netflux
+# Netflux
 
-## Project setup
-```
-npm install
-```
+### Membres du groupe :
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- [Dylan Lecomte](https://github.com/Prototype91)
+- [Sami Hattab](https://github.com/Raze91)
+- [Kenny Herillard](https://github.com/Drallireeh)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Installation des dépendances :
 
-### Lints and fixes files
-```
-npm run lint
-```
+`npm install`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Lancement de Netflux :
+
+`npm run serve`
+
+## Technologies utilisées :
+
+- [Vue.js](https://fr.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Moment.js](https://momentjs.com/)
+- [Fontawesome](https://fontawesome.com/)

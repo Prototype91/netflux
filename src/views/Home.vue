@@ -14,26 +14,15 @@
         <SlidingButtons />
       </div>
     </div>
-    <div class="best-shows">
-      <h3>Science-fiction shows :</h3>
-      <div class="shows-ctnr">
-        <div class="scroll-ctn">
-          <ShowCard
-            v-for="(show, index) in shows.filter((item) =>
-              item.genres.includes('Science-Fiction')
-            )"
-            :key="index"
-            :show="show"
-          />
-        </div>
-        <SlidingButtons />
-      </div>
-    </div>
+
+    <ListSeries title="Science-Fiction" :shows="shows" />
+    <ListSeries title="Horror" :shows="shows" />
   </section>
 </template>
 
 <script>
 import SlidingButtons from "../components/SlidingButtons";
+import ListSeries from "../components/ListSeries";
 import ShowCard from "../components/ShowCard";
 import ShowsService from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
@@ -41,7 +30,7 @@ import Loader from "../components/Loader.vue";
 
 export default {
   name: "Home",
-  components: { ShowCard, SlidingButtons, Loader },
+  components: { ShowCard, SlidingButtons, Loader, ListSeries },
   data() {
     return {
       shows: [],
@@ -73,6 +62,14 @@ export default {
 
 section {
   padding: 50px 0 50px 50px;
+}
+
+.best-shows:not(:first-of-type) {
+  margin-top: 40px
+}
+
+.best-shows:first-of-type h3 {
+  margin-top: 0px;
 }
 
 .best-shows h3 {

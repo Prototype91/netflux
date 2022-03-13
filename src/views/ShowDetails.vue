@@ -20,6 +20,7 @@
         <h3>Season {{ seasonIndex + 1 }}</h3>
 
         <div class="season-ctnr">
+          <div class="scroll-ctn">
           <EpisodeCard
             v-for="(episode, episodeIndex) in episodes.filter(
               (item) => item.season === seasonIndex + 1
@@ -28,12 +29,18 @@
             :episode="episode"
           />
         </div>
+        <SlidingButtons />
+
+        </div>
       </div>
     </div>
     <div>
       <h2>Cast</h2>
       <div class="season-ctnr">
-        <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
+        <div class="scroll-ctn">
+          <CastCard v-for="(actor, index) in cast" :key="index" :cast="actor" />
+        </div>
+        <SlidingButtons />
       </div>
     </div>
     <div>
@@ -59,6 +66,7 @@
 <script>
 import CastCard from "../components/CastCard";
 import EpisodeCard from "../components/EpisodeCard";
+import SlidingButtons from "../components/SlidingButtons";
 import Loader from "../components/Loader.vue";
 import ShowsClient from "../services/clients/shows.client";
 import ShowsMapper from "../services/mappers/shows.mapper";
@@ -72,7 +80,7 @@ import Comment from "@/components/Comment";
 
 export default {
   name: "ShowDetails",
-  components: { Comment, CastCard, EpisodeCard, Loader },
+  components: { Comment, CastCard, EpisodeCard, Loader, SlidingButtons },
   data() {
     return {
       show: {},
@@ -145,9 +153,20 @@ img {
 }
 
 .season-ctnr {
+  position: relative;
+}
+
+.season-ctnr .scroll-ctn {
   display: flex;
   gap: 20px;
   overflow: scroll;
+  position: relative;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.season-ctnr .scroll-ctn::-webkit-scrollbar {
+  display: none;
 }
 
 .content {

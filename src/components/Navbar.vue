@@ -44,7 +44,7 @@ export default {
       this.searchQuery = e.target.value;
     },
     handleSubmit() {
-      this.$router.push(`/search?q=${this.searchQuery}`);
+      if (this.searchQuery.trim().length) this.$router.push(`/search?q=${this.searchQuery}`);
     },
   },
 };

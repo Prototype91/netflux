@@ -18,8 +18,12 @@
       <h2>Seasons</h2>
       <div v-for="(season, seasonIndex) in seasons" :key="seasonIndex">
         <h3>Season {{ seasonIndex + 1 }}</h3>
-
-        <div class="season-ctnr">
+        <div
+          v-if="
+            episodes.filter((item) => item.season === seasonIndex + 1)?.length
+          "
+          class="season-ctnr"
+        >
           <div class="scroll-ctn">
             <EpisodeCard
               v-for="(episode, episodeIndex) in episodes.filter(
@@ -30,6 +34,9 @@
             />
           </div>
           <SlidingButtons />
+        </div>
+        <div v-else>
+          <p>No episodes found ...</p>
         </div>
       </div>
     </div>
